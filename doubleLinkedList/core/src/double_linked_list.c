@@ -16,9 +16,9 @@
         }                                                          \
         else                                                       \
         {                                                          \
-            tail->node.next = (LIST_NODE)item;                                \
+            tail->node.next = (DLIST_NODE)item;                                \
         }                                                          \
-        item->node.prev = (LIST_NODE)tail;                                    \
+        item->node.prev = (DLIST_NODE)tail;                                    \
         item->node.next = NULL;                                    \
         return item;                                               \
     }
@@ -190,18 +190,18 @@
             if (target_item == *head)                                                                \
             {                                                                                        \
                 item_to_insert->node.prev = NULL;                                                    \
-                item_to_insert->node.next = (LIST_NODE)*head;                                                   \
-                (*head)->node.prev = (LIST_NODE)item_to_insert;                                                 \
+                item_to_insert->node.next = (DLIST_NODE)*head;                                                   \
+                (*head)->node.prev = (DLIST_NODE)item_to_insert;                                                 \
                 *head = item_to_insert;                                                              \
             }                                                                                        \
             else                                                                                     \
             {                                                                                        \
                 typename *target_prev = (typename *)(target_item->node.prev);                        \
-                target_item->node.prev = (LIST_NODE)item_to_insert;                                             \
-                item_to_insert->node.next = (LIST_NODE)target_item;                                             \
+                target_item->node.prev = (DLIST_NODE)item_to_insert;                                             \
+                item_to_insert->node.next = (DLIST_NODE)target_item;                                             \
                                                                                                      \
-                item_to_insert->node.prev = (LIST_NODE)target_prev;                                             \
-                target_prev->node.next = (LIST_NODE)item_to_insert;                                             \
+                item_to_insert->node.prev = (DLIST_NODE)target_prev;                                             \
+                target_prev->node.next = (DLIST_NODE)item_to_insert;                                             \
             }                                                                                        \
                                                                                                      \
             return 0;                                                                                \
@@ -228,11 +228,11 @@
             else                                                                                    \
             {                                                                                       \
                 typename *target_next = (typename *)(target_item->node.next);                       \
-                target_item->node.next = (LIST_NODE)item_to_insert;                                            \
-                item_to_insert->node.prev = (LIST_NODE)target_item;                                            \
+                target_item->node.next = (DLIST_NODE)item_to_insert;                                            \
+                item_to_insert->node.prev = (DLIST_NODE)target_item;                                            \
                                                                                                     \
-                item_to_insert->node.next = (LIST_NODE)target_next;                                            \
-                target_next->node.prev = (LIST_NODE)item_to_insert;                                            \
+                item_to_insert->node.next = (DLIST_NODE)target_next;                                            \
+                target_next->node.prev = (DLIST_NODE)item_to_insert;                                            \
             }                                                                                       \
                                                                                                     \
             return 0;                                                                               \
@@ -307,18 +307,18 @@
             {                                                           \
                 if (consec != 1)                                        \
                 {                                                       \
-                    r_prev->node.next = (LIST_NODE)current_node;                   \
+                    r_prev->node.next = (DLIST_NODE)current_node;                   \
                 }                                                       \
             }                                                           \
                                                                         \
             if (r_next)                                                 \
             {                                                           \
-                r_next->node.prev = (LIST_NODE)current_node;                       \
+                r_next->node.prev = (DLIST_NODE)current_node;                       \
             }                                                           \
                                                                         \
             if (c_prev)                                                 \
             {                                                           \
-                c_prev->node.next = (LIST_NODE)random_node;                        \
+                c_prev->node.next = (DLIST_NODE)random_node;                        \
             }                                                           \
                                                                         \
             if (c_next)                                                 \
@@ -326,30 +326,30 @@
                 if (consec != 1)                                        \
                 {                                                       \
                                                                         \
-                    c_next->node.prev = (LIST_NODE)random_node;                    \
+                    c_next->node.prev = (DLIST_NODE)random_node;                    \
                 }                                                       \
             }                                                           \
                                                                         \
             if (consec == 1)                                            \
             {                                                           \
-                current_node->node.prev = (LIST_NODE)random_node;                  \
+                current_node->node.prev = (DLIST_NODE)random_node;                  \
             }                                                           \
             else                                                        \
             {                                                           \
-                current_node->node.prev = (LIST_NODE)r_prev;                       \
+                current_node->node.prev = (DLIST_NODE)r_prev;                       \
             }                                                           \
                                                                         \
-            current_node->node.next = (LIST_NODE)r_next;                           \
+            current_node->node.next = (DLIST_NODE)r_next;                           \
                                                                         \
-            random_node->node.prev = (LIST_NODE)tmp_prev;                          \
+            random_node->node.prev = (DLIST_NODE)tmp_prev;                          \
                                                                         \
             if (consec == 1)                                            \
             {                                                           \
-                random_node->node.next = (LIST_NODE)current_node;                  \
+                random_node->node.next = (DLIST_NODE)current_node;                  \
             }                                                           \
             else                                                        \
             {                                                           \
-                random_node->node.next = (LIST_NODE)tmp_next;                      \
+                random_node->node.next = (DLIST_NODE)tmp_next;                      \
             }                                                           \
                                                                         \
             if (i == 0)                                                 \

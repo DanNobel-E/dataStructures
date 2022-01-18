@@ -2,22 +2,22 @@
 
 #include "list_item.h"
 
-#define LIST_NODE double_list_node_t *
+#define DLIST_NODE double_list_node_t *
 
-#define list_append(head, item, typename) append_##typename(head, item)
-#define list_get_element_at(head, index, typename) getAt_##typename(head, index)
-#define list_get_tail(head, typename) getTail_##typename(head)
-#define list_pop(head, typename) pop_##typename(head)
-#define list_remove(head, item, typename) remove_##typename(head, item)
-#define list_remove_at(head, index, typename) removeAt_##typename(head, index)
-#define list_remove_head(head, typename) removeHead_##typename(head)
-#define list_remove_tail(head, typename) removeTail_##typename(head)
-#define list_insert_before(head, target_item, item_to_insert, typename) insertBefore_##typename(head, target_item, item_to_insert)
-#define list_insert_after(head, target_item, item_to_insert, typename) insertAfter_##typename(head, target_item, item_to_insert)
-#define list_contains(head, item, typename) contains_##typename(head, item)
-#define list_count(head, typename) count_##typename(head)
-#define list_shuffle(head, typename) shuffle_##typename(head)
-#define list_copy_and_shuffle(head, typename) copyShuffle_##typename(head)
+#define dlist_append(head, item, typename) append_##typename(head, item)
+#define dlist_get_element_at(head, index, typename) getAt_##typename(head, index)
+#define dlist_get_tail(head, typename) getTail_##typename(head)
+#define dlist_pop(head, typename) pop_##typename(head)
+#define dlist_remove(head, item, typename) remove_##typename(head, item)
+#define dlist_remove_at(head, index, typename) removeAt_##typename(head, index)
+#define dlist_remove_head(head, typename) removeHead_##typename(head)
+#define dlist_remove_tail(head, typename) removeTail_##typename(head)
+#define dlist_insert_before(head, target_item, item_to_insert, typename) insertBefore_##typename(head, target_item, item_to_insert)
+#define dlist_insert_after(head, target_item, item_to_insert, typename) insertAfter_##typename(head, target_item, item_to_insert)
+#define dlist_contains(head, item, typename) contains_##typename(head, item)
+#define dlist_count(head, typename) count_##typename(head)
+#define dlist_shuffle(head, typename) shuffle_##typename(head)
+#define dlist_copy_and_shuffle(head, typename) copyShuffle_##typename(head)
 
 #define declare_append(head, item, typename) \
     typename *append_##typename(head, item)

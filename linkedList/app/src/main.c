@@ -21,23 +21,23 @@ int main()
         // _itoa(i, index, 10);
         // strcpy(result_strings[i], default_string_buffer);
         // strcat(result_strings[i], index);
-        items[i] = instantiate_item(i, int_item);
+        items[i] = item_new(i, int_item);
         list_append(&my_linked_list, items[i], int_item);
     }
 
-    print_list(my_linked_list, int_item);
+    item_print_list(my_linked_list, int_item);
 
     // invert list
 
     int_item *inverted_list = list_invert(&my_linked_list, int_item);
 
-    print_list(my_linked_list, int_item);
-    print_list(inverted_list, int_item);
+    item_print_list(my_linked_list, int_item);
+    item_print_list(inverted_list, int_item);
 
     inverted_list = list_copy_and_invert(&my_linked_list, int_item);
 
-    print_list(my_linked_list, int_item);
-    print_list(inverted_list, int_item);
+    item_print_list(my_linked_list, int_item);
+    item_print_list(inverted_list, int_item);
 
     // remove node from list
 
@@ -45,7 +45,7 @@ int main()
     list_remove(&my_linked_list, items[0], int_item);
     list_remove(&my_linked_list, items[4], int_item);
 
-    print_list(my_linked_list, int_item);
+    item_print_list(my_linked_list, int_item);
 
     return 0;
 }

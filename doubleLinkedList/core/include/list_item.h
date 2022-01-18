@@ -28,10 +28,10 @@ typedef struct double_list_node_t
 #define size_t_item struct item_size_t
 #define string_item struct item_ptr_char
 
-#define instantiate_item(value, typename) new_##typename(value)
-#define print_list(list, typename) printList_##typename(list)
+#define item_new(value, typename) new_##typename(value)
+#define item_print_list(list, typename) printList_##typename(list)
 
-#define declare_item(value, typename) \
+#define declare_new(value, typename) \
     typename *new_##typename(value)
 
 #define declare_printList(list_type, typename) \
@@ -44,11 +44,11 @@ item_t(size_t);
 
 ptr_item_t(char);
 
-declare_item(int n, int_item);
-declare_item(float f, float_item);
-declare_item(char c, char_item);
-declare_item(size_t n, size_t_item);
-declare_item(const char *string, string_item);
+declare_new(int n, int_item);
+declare_new(float f, float_item);
+declare_new(char c, char_item);
+declare_new(size_t n, size_t_item);
+declare_new(const char *string, string_item);
 
 declare_printList(int_item *list, int_item);
 declare_printList(float_item *list, float_item);

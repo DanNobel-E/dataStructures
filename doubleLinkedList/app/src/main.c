@@ -21,15 +21,15 @@ int main()
         _itoa(i, index, 10);
         strcpy(result_strings[i], default_string_buffer);
         strcat(result_strings[i], index);
-        items[i] = instantiate_item(result_strings[i],string_item);
-        list_append(&my_linked_list, items[i], string_item);
+        items[i] = item_new(result_strings[i],string_item);
+        dlist_append(&my_linked_list, items[i], string_item);
     }
 
-    string_item *new_item_0 = instantiate_item("Item_5", string_item);
-    string_item *new_item_1 = instantiate_item("Item_6",string_item);
+    string_item *new_item_0 = item_new("Item_5", string_item);
+    string_item *new_item_1 = item_new("Item_6",string_item);
 
     // Try list_contains
-    if (!list_contains(&my_linked_list, new_item_0,string_item))
+    if (!dlist_contains(&my_linked_list, new_item_0,string_item))
     {
         printf("Yes\n\n");
     }
@@ -40,23 +40,23 @@ int main()
 
     // Try insert after/before
 
-    list_insert_before(&my_linked_list, items[0],new_item_0, string_item);
-    list_insert_after(&my_linked_list, items[4], new_item_1, string_item);
+    dlist_insert_before(&my_linked_list, items[0],new_item_0, string_item);
+    dlist_insert_after(&my_linked_list, items[4], new_item_1, string_item);
 
-    print_list(my_linked_list, string_item);
+    item_print_list(my_linked_list, string_item);
 
     // Try list_remove/remove_at
 
-    list_remove(&my_linked_list, items[4], string_item);
-    list_remove_at(&my_linked_list, 3, string_item);
+    dlist_remove(&my_linked_list, items[4], string_item);
+    dlist_remove_at(&my_linked_list, 3, string_item);
 
-    print_list(my_linked_list, string_item);
+    item_print_list(my_linked_list, string_item);
 
     // Try list_shuffle
 
-    string_item *shuffled_list = list_shuffle(&my_linked_list, string_item);
+    string_item *shuffled_list = dlist_shuffle(&my_linked_list, string_item);
 
-    print_list(shuffled_list, string_item);
+    item_print_list(shuffled_list, string_item);
 
     return 0;
 }
