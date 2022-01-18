@@ -54,7 +54,6 @@ int main()
 
     // Try list_shuffle
 
-    //string_item_t *shuffled_list = (string_item_t *)list_shuffle((double_list_node_t **)&my_linked_list);
     string_item *shuffled_list = list_shuffle(&my_linked_list, string_item);
 
     print_list(shuffled_list, string_item);

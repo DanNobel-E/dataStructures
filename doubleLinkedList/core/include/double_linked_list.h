@@ -121,28 +121,6 @@ declare_insertAfter(char_item **head, char_item *target_item, char_item *item_to
 declare_insertAfter(size_t_item **head, size_t_item *target_item, size_t_item *item_to_insert, size_t_item);
 declare_insertAfter(string_item **head, string_item *target_item, string_item *item_to_insert, string_item);
 
-// double_list_node_t *list_append(double_list_node_t **head, double_list_node_t *item);
-
-// double_list_node_t *list_get_element_at(double_list_node_t **head, const int index);
-
-// double_list_node_t *list_get_tail(double_list_node_t **head);
-
-// double_list_node_t *list_pop(double_list_node_t **head);
-
-// double_list_node_t *list_remove(double_list_node_t **head, double_list_node_t *item);
-
-// double_list_node_t *list_remove_at(double_list_node_t **head, const int index);
-
-// int list_remove_head(double_list_node_t **head);
-
-// int list_remove_tail(double_list_node_t **head);
-
-// int list_insert_before(double_list_node_t **head, double_list_node_t *target_item, double_list_node_t *item_to_insert);
-
-// int list_insert_after(double_list_node_t **head, double_list_node_t *target_item, double_list_node_t *item_to_insert);
-
-// int list_contains(double_list_node_t **head, double_list_node_t *item);
-
 declare_contains(int_item **head, int_item *item, int_item);
 declare_contains(float_item **head, float_item *item, float_item);
 declare_contains(char_item **head, char_item *item, char_item);
@@ -155,8 +133,6 @@ declare_count(char_item **head, char_item);
 declare_count(size_t_item **head, size_t_item);
 declare_count(string_item **head, string_item);
 
-// int list_count(double_list_node_t **head);
-
 declare_shuffle(int_item **head, int_item);
 declare_shuffle(float_item **head, float_item);
 declare_shuffle(char_item **head, char_item);
@@ -168,7 +144,3 @@ declare_copyShuffle(float_item **head, float_item);
 declare_copyShuffle(char_item **head, char_item);
 declare_copyShuffle(size_t_item **head, size_t_item);
 declare_copyShuffle(string_item **head, string_item);
-
-// double_list_node_t *list_shuffle(double_list_node_t **head);
-
-// double_list_node_t *list_copy_and_shuffle(double_list_node_t **head);
