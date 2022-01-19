@@ -82,24 +82,8 @@ set_node_t *set_search(set_table_t *table, const char *key, const size_t key_len
 
         if (!strcmp(key, keylist_current_node->key) && key_len == keylist_current_node->key_len)
         {
-            int compare = 0;
 
-            for (int i = 0; i < key_len; i++)
-            {
-                if (key[i] != keylist_current_node->key[i])
-                {
-                    compare = 0;
-                    break;
-                }
-
-                compare = 1;
-            }
-
-            if (compare)
-            {
-
-                return keylist_current_node;
-            }
+            return keylist_current_node;
         }
 
         keylist_current_node = keylist_current_node->next;

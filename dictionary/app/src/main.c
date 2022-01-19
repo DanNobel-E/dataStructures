@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "set.h"
+#include "dictionary.h"
 
 int main()
 {
     // init hashtable
     const size_t table_size = 2;
-    set_table_t *table = set_table_new(table_size);
+    int_table *table = dictionary_table_new(table_size,int);
 
     const char *default_string = "Key_";
     char default_string_buffer[4];
@@ -21,36 +21,36 @@ int main()
         _itoa(i, index, 10);
         strcpy(result_strings[i], default_string_buffer);
         strcat(result_strings[i], index);
-        set_insert(table, result_strings[i], strlen(result_strings[i]));
+        dictionary_insert(table, result_strings[i], strlen(result_strings[i]),i,int);
     }
 
     // Try to insert keys already inserted
-    set_insert(table, "Key_0", strlen(result_strings[0]));
-    set_insert(table, "Key_0", strlen(result_strings[0]));
+    dictionary_insert(table, "Key_0", strlen(result_strings[0]),7,int);
+    dictionary_insert(table, "Key_0", strlen(result_strings[0]),0,int);
 
-    set_print_keys(table);
+    dictionary_print_keys(table,int);
 
     // Try search algo
-    set_node_t *node = set_search(table, "Key_f", strlen(result_strings[2]));
+    int_node *node = dictionary_search(table, "Key_f", strlen(result_strings[2]),int);
     if (node)
     {
         printf("\n%s\n", node->key);
     }
 
-    set_node_t *head_node = set_search_keyList_head(table, result_strings[7], strlen(result_strings[5]));
+    int_node *head_node = dictionary_search_keyList_head(table, result_strings[7], strlen(result_strings[5]),int);
     if (head_node)
     {
         printf("\n%s\n", head_node->key);
     }
 
     // Try remove algo
-    set_node_t *removed_node = set_remove(table, result_strings[0], strlen(result_strings[0]));
+    int_node *removed_node = dictionary_remove(table, result_strings[0], strlen(result_strings[0]),int);
     if (removed_node)
     {
         printf("\n%s\n\n", removed_node->key);
     }
 
-    set_print_keys(table);
+    dictionary_print(table,int);
 
     return 0;
 }

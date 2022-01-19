@@ -28,6 +28,5 @@ set_node_t *set_search_keyList_head(set_table_t *table,const char *key, const si
 
 set_node_t *set_remove(set_table_t *table, const char *key, const size_t key_len);
 
-
 void set_print_keys(set_table_t* table);
 
