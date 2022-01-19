@@ -167,6 +167,35 @@
         return result;                                                \
     }
 
+#define destroy_item(typename)                \
+    void destroy_##typename(typename * *item) \
+    {                                         \
+        if (*item)                            \
+        {                                     \
+            free(*item);                      \
+            *item = NULL;                     \
+        }                                     \
+    }
+
+#define destroy(typename)                                             \
+    void destroy_list_##typename(typename * *head)                    \
+    {                                                                 \
+        if (*head)                                                    \
+        {                                                             \
+            typename *current_node = *head;                           \
+            typename *prev_node = NULL;                               \
+            while (current_node)                                      \
+            {                                                         \
+                                                                      \
+                prev_node = current_node;                             \
+                current_node = (typename *)(current_node->node.next); \
+                destroy_##typename(&prev_node);                       \
+            }                                                         \
+                                                                      \
+            *head = NULL;                                             \
+        }                                                             \
+    }
+
 append(int_item);
 append(float_item);
 append(char_item);
@@ -214,3 +243,15 @@ copyList(float_item);
 copyList(char_item);
 copyList(size_t_item);
 copyList(string_item);
+
+destroy_item(int_item);
+destroy_item(float_item);
+destroy_item(char_item);
+destroy_item(size_t_item);
+destroy_item(string_item);
+
+destroy(int_item);
+destroy(float_item);
+destroy(char_item);
+destroy(size_t_item);
+destroy(string_item);

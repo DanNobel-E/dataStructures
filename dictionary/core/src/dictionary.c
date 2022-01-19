@@ -24,6 +24,12 @@
 #define insert(typename)                                                                                                                      \
     dictionary_node_##typename *insert_##typename(dictionary_table_##typename * table, const char *key, const size_t key_len, typename value) \
     {                                                                                                                                         \
+                                                                                                                                              \
+        if (!table)                                                                                                                           \
+        {                                                                                                                                     \
+            return NULL;                                                                                                                      \
+        }                                                                                                                                     \
+                                                                                                                                              \
         if (search_##typename(table, key, key_len))                                                                                           \
         {                                                                                                                                     \
             return NULL;                                                                                                                      \
@@ -65,9 +71,28 @@
         return new_item;                                                                                                                      \
     }
 
+#define change_value(typename)                                                                                                                      \
+    dictionary_node_##typename *change_value_##typename(dictionary_table_##typename * table, const char *key, const size_t key_len, typename value) \
+    {                                                                                                                                               \
+                                                                                                                                                    \
+        dictionary_node_##typename *key_node = search_##typename(table, key, key_len);                                                              \
+        if (key_node)                                                                                                                               \
+        {                                                                                                                                           \
+                                                                                                                                                    \
+            key_node->object = value;                                                                                                               \
+            return key_node;                                                                                                                        \
+        }                                                                                                                                           \
+                                                                                                                                                    \
+        return NULL;                                                                                                                                \
+    }
+
 #define search(typename)                                                                                                      \
     dictionary_node_##typename *search_##typename(dictionary_table_##typename * table, const char *key, const size_t key_len) \
     {                                                                                                                         \
+        if (!table)                                                                                                           \
+        {                                                                                                                     \
+            return NULL;                                                                                                      \
+        }                                                                                                                     \
         size_t hash = dictionary_djb33x_hash(key, key_len);                                                                   \
         size_t index = hash % table->hashmap_size;                                                                            \
         dictionary_node_##typename *keylist_current_node = table->nodes[index];                                               \
@@ -90,6 +115,10 @@
 #define search_head(typename)                                                                                                      \
     dictionary_node_##typename *search_head_##typename(dictionary_table_##typename * table, const char *key, const size_t key_len) \
     {                                                                                                                              \
+        if (!table)                                                                                                                \
+        {                                                                                                                          \
+            return NULL;                                                                                                           \
+        }                                                                                                                          \
         size_t hash = dictionary_djb33x_hash(key, key_len);                                                                        \
         size_t index = hash % table->hashmap_size;                                                                                 \
         dictionary_node_##typename *keylist_head = table->nodes[index];                                                            \
@@ -138,19 +167,21 @@
         return NULL;                                                                                                          \
     }
 
-#define print_keys(typename)                                            \
-    void print_keys_##typename(dictionary_table_##typename * table)     \
-    {                                                                   \
-                                                                        \
-        for (int i = 0; i < table->hashmap_size; i++)                   \
-        {                                                               \
-            dictionary_node_##typename *current_node = table->nodes[i]; \
-            while (current_node)                                        \
-            {                                                           \
-                printf("Key: %s\n", current_node->key);                \
-                current_node = current_node->next;                      \
-            }                                                           \
-        }                                                               \
+#define print_keys(typename)                                                \
+    void print_keys_##typename(dictionary_table_##typename * table)         \
+    {                                                                       \
+        if (table)                                                          \
+        {                                                                   \
+            for (int i = 0; i < table->hashmap_size; i++)                   \
+            {                                                               \
+                dictionary_node_##typename *current_node = table->nodes[i]; \
+                while (current_node)                                        \
+                {                                                           \
+                    printf("Key: %s\n", current_node->key);                 \
+                    current_node = current_node->next;                      \
+                }                                                           \
+            }                                                               \
+        }                                                                   \
     }
 
 #define print(typename)                                        \
@@ -159,6 +190,36 @@
                                                                \
         print_keys_##typename(table);                          \
         dictionary_print_values_##typename(table);             \
+    }
+
+#define destory_node(typename)                                           \
+    void destroy_node_##typename(dictionary_node_##typename * *node_ptr) \
+    {                                                                    \
+        free(*node_ptr);                                                 \
+        *node_ptr = NULL;                                                \
+    }
+
+#define destory_table(typename)                                                    \
+    void destroy_table_##typename(dictionary_table_##typename * *table_ptr)        \
+    {                                                                              \
+        if (*table_ptr)                                                            \
+        {                                                                          \
+                                                                                   \
+            for (int i = 0; i < (*table_ptr)->hashmap_size; i++)                   \
+            {                                                                      \
+                dictionary_node_##typename *current_node = (*table_ptr)->nodes[i]; \
+                dictionary_node_##typename *prev_node = NULL;                      \
+                while (current_node)                                               \
+                {                                                                  \
+                    prev_node = current_node;                                      \
+                    current_node = current_node->next;                             \
+                    destroy_node_##typename(&prev_node);                           \
+                }                                                                  \
+            }                                                                      \
+                                                                                   \
+            free(*table_ptr);                                                      \
+            *table_ptr = NULL;                                                     \
+        }                                                                          \
     }
 
 table_new(int);
@@ -172,6 +233,12 @@ insert(float);
 insert(char);
 insert(size_t);
 insert(string);
+
+change_value(int);
+change_value(float);
+change_value(char);
+change_value(size_t);
+change_value(string);
 
 search(int);
 search(float);
@@ -203,6 +270,18 @@ print(char);
 print(size_t);
 print(string);
 
+destory_node(int);
+destory_node(float);
+destory_node(char);
+destory_node(size_t);
+destory_node(string);
+
+destory_table(int);
+destory_table(float);
+destory_table(char);
+destory_table(size_t);
+destory_table(string);
+
 size_t dictionary_djb33x_hash(const char *key, const size_t keylen)
 {
     size_t hash = 5381;
@@ -215,56 +294,64 @@ size_t dictionary_djb33x_hash(const char *key, const size_t keylen)
 
 void dictionary_print_values_int(int_table *table)
 {
-
-    for (int i = 0; i < table->hashmap_size; i++)
+    if (table)
     {
-        dictionary_node_int *current_node = table->nodes[i];
-        while (current_node)
+        for (int i = 0; i < table->hashmap_size; i++)
         {
-            printf("Value: %d\n", current_node->object);
-            current_node = current_node->next;
+            dictionary_node_int *current_node = table->nodes[i];
+            while (current_node)
+            {
+                printf("Value: %d\n", current_node->object);
+                current_node = current_node->next;
+            }
         }
     }
 }
 
 void dictionary_print_values_float(float_table *table)
 {
-
-    for (int i = 0; i < table->hashmap_size; i++)
+    if (table)
     {
-        dictionary_node_float *current_node = table->nodes[i];
-        while (current_node)
+        for (int i = 0; i < table->hashmap_size; i++)
         {
-            printf("Value: %f\n", current_node->object);
-            current_node = current_node->next;
+            dictionary_node_float *current_node = table->nodes[i];
+            while (current_node)
+            {
+                printf("Value: %f\n", current_node->object);
+                current_node = current_node->next;
+            }
         }
     }
 }
 
 void dictionary_print_values_char(char_table *table)
 {
-
-    for (int i = 0; i < table->hashmap_size; i++)
+    if (table)
     {
-        dictionary_node_char *current_node = table->nodes[i];
-        while (current_node)
+        for (int i = 0; i < table->hashmap_size; i++)
         {
-            printf("Value: %c\n", current_node->object);
-            current_node = current_node->next;
+            dictionary_node_char *current_node = table->nodes[i];
+            while (current_node)
+            {
+                printf("Value: %c\n", current_node->object);
+                current_node = current_node->next;
+            }
         }
     }
 }
 
 void dictionary_print_values_size_t(size_t_table *table)
 {
-
-    for (int i = 0; i < table->hashmap_size; i++)
+    if (table)
     {
-        dictionary_node_size_t *current_node = table->nodes[i];
-        while (current_node)
+        for (int i = 0; i < table->hashmap_size; i++)
         {
-            printf("Value: %zu\n", current_node->object);
-            current_node = current_node->next;
+            dictionary_node_size_t *current_node = table->nodes[i];
+            while (current_node)
+            {
+                printf("Value: %zu\n", current_node->object);
+                current_node = current_node->next;
+            }
         }
     }
 }
@@ -272,13 +359,16 @@ void dictionary_print_values_size_t(size_t_table *table)
 void dictionary_print_values_string(string_table *table)
 {
 
-    for (int i = 0; i < table->hashmap_size; i++)
+    if (table)
     {
-        dictionary_node_string *current_node = table->nodes[i];
-        while (current_node)
+        for (int i = 0; i < table->hashmap_size; i++)
         {
-            printf("Value: %s\n", current_node->object);
-            current_node = current_node->next;
+            dictionary_node_string *current_node = table->nodes[i];
+            while (current_node)
+            {
+                printf("Value: %s\n", current_node->object);
+                current_node = current_node->next;
+            }
         }
     }
 }

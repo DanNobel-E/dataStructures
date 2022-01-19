@@ -18,6 +18,9 @@
 #define dlist_count(head, typename) count_##typename(head)
 #define dlist_shuffle(head, typename) shuffle_##typename(head)
 #define dlist_copy_and_shuffle(head, typename) copyShuffle_##typename(head)
+#define dlist_destroy_item(item, typename) destroy_##typename(item)
+#define dlist_destroy(head, typename) destroy_list_##typename(head)
+
 
 #define declare_append(head, item, typename) \
     typename *append_##typename(head, item)
@@ -60,6 +63,12 @@
 
 #define declare_copyShuffle(head, typename) \
     typename *copyShuffle_##typename(head)
+
+    #define declare_destroy_item(item, typename) \
+    void destroy_##typename(item)
+    
+#define declare_destroy(head, typename) \
+    void destroy_list_##typename(head)
 
 declare_append(int_item **head, int_item *item, int_item);
 declare_append(float_item **head, float_item *item, float_item);
@@ -144,3 +153,15 @@ declare_copyShuffle(float_item **head, float_item);
 declare_copyShuffle(char_item **head, char_item);
 declare_copyShuffle(size_t_item **head, size_t_item);
 declare_copyShuffle(string_item **head, string_item);
+
+declare_destroy_item(int_item **item, int_item);
+declare_destroy_item(float_item **item, float_item);
+declare_destroy_item(char_item **item, char_item);
+declare_destroy_item(size_t_item **item, size_t_item);
+declare_destroy_item(string_item **item, string_item);
+
+declare_destroy(int_item **head, int_item);
+declare_destroy(float_item **head, float_item);
+declare_destroy(char_item **head, char_item);
+declare_destroy(size_t_item **head, size_t_item);
+declare_destroy(string_item **head, string_item);

@@ -32,6 +32,12 @@ set_table_t *set_table_new(const size_t hashmap_size)
 
 set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len)
 {
+    if (!table)
+    {
+
+        return NULL;
+    }
+
     if (set_search(table, key, key_len))
     {
         return NULL;
@@ -73,6 +79,12 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
 
 set_node_t *set_search(set_table_t *table, const char *key, const size_t key_len)
 {
+    if (!table)
+    {
+
+        return NULL;
+    }
+
     size_t hash = djb33x_hash(key, key_len);
     size_t index = hash % table->hashmap_size;
     set_node_t *keylist_current_node = table->nodes[index];
@@ -94,6 +106,12 @@ set_node_t *set_search(set_table_t *table, const char *key, const size_t key_len
 
 set_node_t *set_search_keyList_head(set_table_t *table, const char *key, const size_t key_len)
 {
+    if (!table)
+    {
+
+        return NULL;
+    }
+
     size_t hash = djb33x_hash(key, key_len);
     size_t index = hash % table->hashmap_size;
     set_node_t *keylist_head = table->nodes[index];
@@ -144,13 +162,44 @@ set_node_t *set_remove(set_table_t *table, const char *key, const size_t key_len
 void set_print_keys(set_table_t *table)
 {
 
-    for (int i = 0; i < table->hashmap_size; i++)
+    if (table)
     {
-        set_node_t *current_node = table->nodes[i];
-        while (current_node)
+        for (int i = 0; i < table->hashmap_size; i++)
         {
-            printf("%s\n", current_node->key);
-            current_node = current_node->next;
+            set_node_t *current_node = table->nodes[i];
+            while (current_node)
+            {
+                printf("%s\n", current_node->key);
+                current_node = current_node->next;
+            }
+        }
+    }
+}
+
+void set_node_destroy(set_node_t **node_ptr)
+{
+
+    free(*node_ptr);
+    *node_ptr = NULL;
+}
+
+void set_table_destroy(set_table_t **table_ptr)
+{
+
+    if (*table_ptr)
+    {
+
+        for (int i = 0; i < (*table_ptr)->hashmap_size; i++)
+        {
+            set_node_t *current_node = (*table_ptr)->nodes[i];
+            set_node_t *prev_node = NULL;
+
+            while (current_node)
+            {
+                prev_node = current_node;
+                current_node = current_node->next;
+                set_node_destroy(&prev_node);
+            }
         }
     }
 }

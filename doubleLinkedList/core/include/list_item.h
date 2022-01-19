@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 typedef struct double_list_node_t
 {
     struct double_list_node_t *prev;

@@ -12,6 +12,10 @@
 #define list_remove_tail(head, typename) removeTail_##typename(head)
 #define list_invert(head, typename) invert_##typename(head)
 #define list_copy_and_invert(head, typename) copyList_##typename(head)
+#define list_destroy_item(item, typename) destroy_##typename(item)
+#define list_destroy(head, typename) destroy_list_##typename(head)
+
+
 
 #define declare_append(head, item, typename) \
     typename *append_##typename(head, item)
@@ -36,6 +40,12 @@
 
 #define declare_copyList(head, typename) \
     typename *copyList_##typename(head)
+
+#define declare_destroy_item(item, typename) \
+    void destroy_##typename(item)
+    
+#define declare_destroy(head, typename) \
+    void destroy_list_##typename(head)
 
 declare_append(int_item **head, int_item *item, int_item);
 declare_append(float_item **head, float_item *item, float_item);
@@ -84,3 +94,15 @@ declare_copyList(float_item **head, float_item);
 declare_copyList(char_item **head, char_item);
 declare_copyList(size_t_item **head, size_t_item);
 declare_copyList(string_item **head, string_item);
+
+declare_destroy_item(int_item **item, int_item);
+declare_destroy_item(float_item **item, float_item);
+declare_destroy_item(char_item **item, char_item);
+declare_destroy_item(size_t_item **item, size_t_item);
+declare_destroy_item(string_item **item, string_item);
+
+declare_destroy(int_item **head, int_item);
+declare_destroy(float_item **head, float_item);
+declare_destroy(char_item **head, char_item);
+declare_destroy(size_t_item **head, size_t_item);
+declare_destroy(string_item **head, string_item);

@@ -10,17 +10,9 @@ int main()
     int_item *my_linked_list = NULL; // Init list
 
     int_item *items[5]; // Init items
-    // const char *default_string = "Item_";
-    // char default_string_buffer[5];
-    // strcpy(default_string_buffer, default_string);
-    // char index[2];
-    // char result_strings[5][10];
 
     for (int i = 0; i < 5; i++)
     {
-        // _itoa(i, index, 10);
-        // strcpy(result_strings[i], default_string_buffer);
-        // strcat(result_strings[i], index);
         items[i] = item_new(i, int_item);
         list_append(&my_linked_list, items[i], int_item);
     }
@@ -46,6 +38,13 @@ int main()
     list_remove(&my_linked_list, items[4], int_item);
 
     item_print_list(my_linked_list, int_item);
+
+    list_destroy_item(&items[0],int_item);
+    list_destroy_item(&items[2],int_item);
+    list_destroy_item(&items[4],int_item);
+    list_destroy(&inverted_list, int_item);
+    list_destroy(&my_linked_list,int_item);
+
 
     return 0;
 }

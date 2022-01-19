@@ -52,5 +52,8 @@ int main()
 
     set_print_keys(table);
 
+    set_node_destroy(&removed_node);
+    set_table_destroy(&table);
+
     return 0;
 }
