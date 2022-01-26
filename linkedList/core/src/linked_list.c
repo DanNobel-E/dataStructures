@@ -7,6 +7,11 @@
 #define append(typename)                                           \
     typename *append_##typename(typename * *head, typename * item) \
     {                                                              \
+                                                                   \
+        if (!item)                                                 \
+        {                                                          \
+            return NULL;                                           \
+        }                                                          \
         typename *tail = getTail_##typename(head);                 \
         if (!tail)                                                 \
         {                                                          \
@@ -24,6 +29,10 @@
     typename *getTail_##typename(typename * *head)                \
     {                                                             \
         typename *current_node = *head;                           \
+        if (!current_node)                                        \
+        {                                                         \
+            return NULL;                                          \
+        }                                                         \
         typename *last_node = NULL;                               \
         while (current_node)                                      \
         {                                                         \
@@ -82,32 +91,6 @@
         }                                                           \
                                                                     \
         return NULL;                                                \
-    }
-
-#define removeHead(typename)                    \
-    int removeHead_##typename(typename * *head) \
-    {                                           \
-                                                \
-        int result = -1;                        \
-        if (pop_##typename(head) != NULL)       \
-        {                                       \
-            result = 0;                         \
-        }                                       \
-                                                \
-        return result;                          \
-    }
-
-#define removeTail(typename)                    \
-    int removeTail_##typename(typename * *head) \
-    {                                           \
-                                                \
-        int result = -1;                        \
-        if (getTail_##typename(head) != NULL)   \
-        {                                       \
-            result = 0;                         \
-        }                                       \
-                                                \
-        return result;                          \
     }
 
 #define invert(typename)                                       \
@@ -219,18 +202,6 @@ remove(float_item);
 remove(char_item);
 remove(size_t_item);
 remove(string_item);
-
-removeHead(int_item);
-removeHead(float_item);
-removeHead(char_item);
-removeHead(size_t_item);
-removeHead(string_item);
-
-removeTail(int_item);
-removeTail(float_item);
-removeTail(char_item);
-removeTail(size_t_item);
-removeTail(string_item);
 
 invert(int_item);
 invert(float_item);
