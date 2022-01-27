@@ -1,6 +1,6 @@
 #pragma once
 
-#include "list_item.h"
+#include "double_list_item.h"
 
 #define DLIST_NODE double_list_node_t *
 
@@ -10,8 +10,6 @@
 #define dlist_pop(head, typename) pop_##typename(head)
 #define dlist_remove(head, item, typename) remove_##typename(head, item)
 #define dlist_remove_at(head, index, typename) removeAt_##typename(head, index)
-#define dlist_remove_head(head, typename) removeHead_##typename(head)
-#define dlist_remove_tail(head, typename) removeTail_##typename(head)
 #define dlist_insert_before(head, target_item, item_to_insert, typename) insertBefore_##typename(head, target_item, item_to_insert)
 #define dlist_insert_after(head, target_item, item_to_insert, typename) insertAfter_##typename(head, target_item, item_to_insert)
 #define dlist_contains(head, item, typename) contains_##typename(head, item)
@@ -39,12 +37,6 @@
 
 #define declare_removeAt(head, index, typename) \
     typename *removeAt_##typename(head, index)
-
-#define declare_removeHead(head, typename) \
-    int removeHead_##typename(head)
-
-#define declare_removeTail(head, typename) \
-    int removeTail_##typename(head)
 
 #define declare_insertBefore(head, target_item, item_to_insert, typename) \
     int insertBefore_##typename(head, target_item, item_to_insert)
@@ -105,18 +97,6 @@ declare_removeAt(float_item **head, const int index, float_item);
 declare_removeAt(char_item **head, const int index, char_item);
 declare_removeAt(size_t_item **head, const int index, size_t_item);
 declare_removeAt(string_item **head, const int index, string_item);
-
-declare_removeHead(int_item **head, int_item);
-declare_removeHead(float_item **head, float_item);
-declare_removeHead(char_item **head, char_item);
-declare_removeHead(size_t_item **head, size_t_item);
-declare_removeHead(string_item **head, string_item);
-
-declare_removeTail(int_item **head, int_item);
-declare_removeTail(float_item **head, float_item);
-declare_removeTail(char_item **head, char_item);
-declare_removeTail(size_t_item **head, size_t_item);
-declare_removeTail(string_item **head, string_item);
 
 declare_insertBefore(int_item **head, int_item *target_item, int_item *item_to_insert, int_item);
 declare_insertBefore(float_item **head, float_item *target_item, float_item *item_to_insert, float_item);

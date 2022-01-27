@@ -1,5 +1,5 @@
 #include "double_linked_list.h"
-#include "list_item.h"
+#include "double_list_item.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,6 +9,10 @@
 #define append(typename)                                           \
     typename *append_##typename(typename * *head, typename * item) \
     {                                                              \
+        if (!item)                                                 \
+        {                                                          \
+            return NULL;                                           \
+        }                                                          \
         typename *tail = getTail_##typename(head);                 \
         if (!tail)                                                 \
         {                                                          \
@@ -150,32 +154,6 @@
         return item;                                                 \
     }
 
-#define removeHead(typename)                    \
-    int removeHead_##typename(typename * *head) \
-    {                                           \
-                                                \
-        int result = -1;                        \
-        if (pop_##typename(head) != NULL)       \
-        {                                       \
-            result = 0;                         \
-        }                                       \
-                                                \
-        return result;                          \
-    }
-
-#define removeTail(typename)                    \
-    int removeTail_##typename(typename * *head) \
-    {                                           \
-                                                \
-        int result = -1;                        \
-        if (getTail_##typename(head) != NULL)   \
-        {                                       \
-            result = 0;                         \
-        }                                       \
-                                                \
-        return result;                          \
-    }
-
 #define insertBefore(typename)                                                                       \
     int insertBefore_##typename(typename * *head, typename * target_item, typename * item_to_insert) \
     {                                                                                                \
@@ -278,12 +256,15 @@
 #define shuffle(typename)                                               \
     typename *shuffle_##typename(typename * *head)                      \
     {                                                                   \
+        if (count_##typename(head) == 1)                                \
+        {                                                               \
+            return *head;                                               \
+        }                                                               \
+                                                                        \
         typename *result = NULL;                                        \
         typename *current_node = NULL;                                  \
         typename *random_node = NULL;                                   \
                                                                         \
-        time_t t = time(NULL);                                          \
-        srand(t);                                                       \
         const int size = count_##typename(head);                        \
         for (int i = 0; i < size - 1; i++)                              \
         {                                                               \
@@ -466,18 +447,6 @@ removeAt(float_item);
 removeAt(char_item);
 removeAt(size_t_item);
 removeAt(string_item);
-
-removeHead(int_item);
-removeHead(float_item);
-removeHead(char_item);
-removeHead(size_t_item);
-removeHead(string_item);
-
-removeTail(int_item);
-removeTail(float_item);
-removeTail(char_item);
-removeTail(size_t_item);
-removeTail(string_item);
 
 insertBefore(int_item);
 insertBefore(float_item);

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "double_linked_list.h"
-#include "list_item.h"
+#include "double_list_item.h"
 
 int main()
 {
@@ -23,6 +23,7 @@ int main()
         items[i] = item_new(result_strings[i], string_item);
         dlist_append(&my_linked_list, items[i], string_item);
     }
+
 
     string_item *new_item_0 = item_new("Item_5", string_item);
     string_item *new_item_1 = item_new("Item_6", string_item);
@@ -52,6 +53,8 @@ int main()
     item_print_list(my_linked_list, string_item);
 
     // Try list_shuffle
+    time_t t = time(NULL);                                          
+    srand(t);   
 
     string_item *shuffled_list = dlist_shuffle(&my_linked_list, string_item);
 
