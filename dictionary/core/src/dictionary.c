@@ -6,6 +6,10 @@
 #define table_new(typename)                                                               \
     dictionary_table_##typename *table_new_##typename(size_t hashmap_size)                \
     {                                                                                     \
+        if (hashmap_size <= 0)                                                            \
+        {                                                                                 \
+            return NULL;                                                                  \
+        }                                                                                 \
         dictionary_table_##typename *table = malloc(sizeof(dictionary_table_##typename)); \
         if (!table)                                                                       \
         {                                                                                 \
@@ -45,10 +49,13 @@
             {                                                                                                                                 \
                 return NULL;                                                                                                                  \
             }                                                                                                                                 \
-            table->nodes[index]->key = key;                                                                                                   \
+            char *key_copy = malloc(sizeof(char) * key_len);                                                                                  \
+            strcpy_s(key_copy, key_len + 1, key);                                                                                             \
+            table->nodes[index]->key = key_copy;                                                                                              \
             table->nodes[index]->key_len = key_len;                                                                                           \
             table->nodes[index]->object = value;                                                                                              \
             table->nodes[index]->next = NULL;                                                                                                 \
+            table->nodes[table->hashmap_size] = NULL;                                                                                         \
             return table->nodes[index];                                                                                                       \
         }                                                                                                                                     \
                                                                                                                                               \

@@ -15,6 +15,11 @@ size_t djb33x_hash(const char *key, const size_t keylen)
 
 set_table_t *set_table_new(const size_t hashmap_size)
 {
+    if (hashmap_size <= 0)
+    {
+        return NULL;
+    }
+
     set_table_t *table = malloc(sizeof(set_table_t));
     if (!table)
     {
@@ -53,9 +58,12 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
         {
             return NULL;
         }
-        table->nodes[index]->key = key;
+        char * key_copy= malloc(sizeof(char)*key_len);
+        strcpy_s(key_copy,key_len+1,key);
+        table->nodes[index]->key = key_copy;
         table->nodes[index]->key_len = key_len;
         table->nodes[index]->next = NULL;
+        table->nodes[table->hashmap_size]= NULL;
         return table->nodes[index];
     }
 
@@ -201,5 +209,7 @@ void set_table_destroy(set_table_t **table_ptr)
                 set_node_destroy(&prev_node);
             }
         }
+        free(*table_ptr);
+        *table_ptr = NULL;
     }
 }
