@@ -154,3 +154,4 @@ declare_destroy_table(float_table **table_ptr, float);
 declare_destroy_table(char_table **table_ptr, char);
 declare_destroy_table(size_t_table **table_ptr, size_t);
 declare_destroy_table(string_table **table_ptr, string);
+

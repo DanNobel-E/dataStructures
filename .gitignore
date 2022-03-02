@@ -1,5 +1,8 @@
+/bin
+
 # Prerequisites
 *.d
+*.vscode
 
 # Object files
 *.o
