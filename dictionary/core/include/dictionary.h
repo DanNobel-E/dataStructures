@@ -326,7 +326,6 @@ dictionary_table_t(string);
 //functions declarations
 size_t dictionary_djb33x_hash(const char *key, const size_t keylen);
 
-
 declare_table_new(const size_t hashmap_size, int);
 declare_table_new(const size_t hashmap_size, float);
 declare_table_new(const size_t hashmap_size, char);

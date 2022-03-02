@@ -1,35 +1,7 @@
 #include "linked_list.h"
 #include "linked_list_item.h"
-#include <stddef.h>
-#include <stdlib.h>
-#include <stdio.h>
 
-#define new(value, typename)                       \
-    typename *new_##typename(value v)              \
-    {                                              \
-        typename *item = malloc(sizeof(typename)); \
-        if (!item)                                 \
-        {                                          \
-            return NULL;                           \
-        }                                          \
-        item->object = v;                          \
-        item->node.next=NULL;                      \
-        return item;                               \
-    }
-
-#define printList(list_type, typename)           \
-    void printList_##typename(list_type * list)  \
-    {                                            \
-        list_type *item = list;                  \
-        while (item)                             \
-        {                                        \
-            print_##typename(*item);             \
-            item = (list_type *)item->node.next; \
-        }                                        \
-                                                 \
-        printf("\n\n");                          \
-    }
-
+//functions implementation
 new (int, int_item);
 new (float, float_item);
 new (char, char_item);
