@@ -170,6 +170,14 @@ CLOVE_TEST(Dictionary_InsertAlreadyExistingKeyMultipleHash)
     dictionary_destroy_table(&table, int);
 }
 
+CLOVE_SUITE(Test_DictionaryInitialization)
+{
+
+    CLOVE_SUITE_TESTS(Dictionary_TableNewZeroSize, Dictionary_TableNewSizeOutOfBounds, Dictionary_InsertOnNullTable, Dictionary_InsertOneKeyOneHash,
+                      Dictionary_InsertOneKeysTwoHash, Dictionary_InsertTwoKeysOneHash, Dictionary_InsertTwoKeysTwoHash, Dictionary_InsertThreeKeysTwoHash,
+                      Dicitonary_InsertAlreadyExistingKeyOneHash, Dictionary_InsertAlreadyExistingKeyMultipleHash);
+}
+
 CLOVE_TEST(Dictionary_ChangeValueOnNullTable)
 {
     int_table *table = dictionary_table_new(-1, int);
@@ -217,6 +225,11 @@ CLOVE_TEST(Dictionary_ChangeValueSuccess)
     CLOVE_INT_EQ(10, changed->object);
 
     dictionary_destroy_table(&table, int);
+}
+
+CLOVE_SUITE(Test_DictionaryChangeValue)
+{
+    CLOVE_SUITE_TESTS(Dictionary_ChangeValueOnNullTable, Dictionary_ChangeValueOnNotInsertedKey, Dictionary_ChangeValueSuccess);
 }
 
 CLOVE_TEST(Dicitonary_SearchOnNullTable)
@@ -418,6 +431,13 @@ CLOVE_TEST(Dictionary_SearchHeadKeyOnMultipleHash)
     dictionary_destroy_table(&table, int);
 }
 
+CLOVE_SUITE(Test_DictionarySearch)
+{
+    CLOVE_SUITE_TESTS(Dicitonary_SearchOnNullTable, Dictionary_SearchOnSingleHash,
+                      Dictionary_SearchOnMultipleHash, Dictionary_SearchFailsOnKey, Dicitonary_SearchFailsOnKeyLen, Dictionary_SearchHeadKeyOnNullTable,
+                      Dictionary_SearchHeadKeyOnSingleHash, Dictionary_SearchHeadKeyOnMultipleHash);
+}
+
 CLOVE_TEST(Dictionary_RemoveOnNullTable)
 {
     int_table *table = dictionary_table_new(-1, int);
@@ -538,14 +558,8 @@ CLOVE_TEST(Dictionary_RemoveSuccess)
     dictionary_destroy_node(&removed, int);
 }
 
-CLOVE_SUITE(Test_Dictionary)
+CLOVE_SUITE(Test_DictionaryRemove)
 {
-
-    CLOVE_SUITE_TESTS(Dictionary_TableNewZeroSize, Dictionary_TableNewSizeOutOfBounds, Dictionary_InsertOnNullTable, Dictionary_InsertOneKeyOneHash,
-                      Dictionary_InsertOneKeysTwoHash, Dictionary_InsertTwoKeysOneHash, Dictionary_InsertTwoKeysTwoHash, Dictionary_InsertThreeKeysTwoHash,
-                      Dicitonary_InsertAlreadyExistingKeyOneHash, Dictionary_InsertAlreadyExistingKeyMultipleHash, Dictionary_ChangeValueOnNullTable,
-                      Dictionary_ChangeValueOnNotInsertedKey, Dictionary_ChangeValueSuccess, Dicitonary_SearchOnNullTable, Dictionary_SearchOnSingleHash, 
-                      Dictionary_SearchOnMultipleHash, Dictionary_SearchFailsOnKey, Dicitonary_SearchFailsOnKeyLen, Dictionary_SearchHeadKeyOnNullTable, 
-                      Dictionary_SearchHeadKeyOnSingleHash, Dictionary_SearchHeadKeyOnMultipleHash, Dictionary_RemoveOnNullTable, Dictionary_RemoveLastElement, 
+    CLOVE_SUITE_TESTS(Dictionary_RemoveOnNullTable, Dictionary_RemoveLastElement,
                       Dictionary_RemoveNotInsertedKey, Dictionary_RemoveHeadKey, Dictionary_RemoveSuccess);
 }
