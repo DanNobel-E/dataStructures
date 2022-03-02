@@ -1,5 +1,10 @@
 #pragma once
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+//defining structs signatures and fields
 typedef struct double_list_node_t
 {
     struct double_list_node_t *prev;
@@ -20,21 +25,54 @@ typedef struct double_list_node_t
         const typename *object;  \
     };
 
+//defining structs implementation names
 #define int_item struct item_int
 #define float_item struct item_float
 #define char_item struct item_char
 #define size_t_item struct item_size_t
 #define string_item struct item_ptr_char
 
-#define item_new(value, typename) new_##typename(value)
-#define item_print_list(list, typename) printList_##typename(list)
-
+//defining declarations signatures
 #define declare_new(value, typename) \
     typename *new_##typename(value)
 
 #define declare_printList(list_type, typename) \
     void printList_##typename(list_type)
 
+//defining functions signatures
+#define item_new(value, typename) new_##typename(value)
+#define item_print_list(list, typename) printList_##typename(list)
+
+//functions generic implementation
+    #define new(value, typename)                       \
+    typename *new_##typename(value v)              \
+    {                                              \
+        typename *item = malloc(sizeof(typename)); \
+        if (!item)                                 \
+        {                                          \
+            return NULL;                           \
+        }                                          \
+        item->object = v;                          \
+        item->node.next = NULL;                    \
+        item->node.prev = NULL;                    \
+        return item;                               \
+    }
+
+#define printList(list_type, typename)           \
+    void printList_##typename(list_type * list)  \
+    {                                            \
+        list_type *item = list;                  \
+        while (item)                             \
+        {                                        \
+            print_##typename(*item);             \
+            item = (list_type *)item->node.next; \
+        }                                        \
+                                                 \
+        printf("\n\n");                          \
+    }
+
+
+//struct definition
 item_t(int);
 item_t(float);
 item_t(char);
@@ -42,6 +80,7 @@ item_t(size_t);
 
 ptr_item_t(char);
 
+//functions declarations
 declare_new(int n, int_item);
 declare_new(float f, float_item);
 declare_new(char c, char_item);
