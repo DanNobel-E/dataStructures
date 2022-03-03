@@ -68,12 +68,6 @@ shuffle(char_item);
 shuffle(size_t_item);
 shuffle(string_item);
 
-copyShuffle(int_item);
-copyShuffle(float_item);
-copyShuffle(char_item);
-copyShuffle(size_t_item);
-copyShuffle(string_item);
-
 destroy_item(int_item);
 destroy_item(float_item);
 destroy_item(char_item);

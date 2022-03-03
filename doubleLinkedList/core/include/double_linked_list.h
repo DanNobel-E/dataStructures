@@ -43,9 +43,6 @@
 #define declare_shuffle(head, typename) \
     typename *shuffle_##typename(head)
 
-#define declare_copyShuffle(head, typename) \
-    typename *copyShuffle_##typename(head)
-
     #define declare_destroy_item(item, typename) \
     void destroy_##typename(item)
     
@@ -64,7 +61,6 @@
 #define dlist_contains(head, item, typename) contains_##typename(head, item)
 #define dlist_count(head, typename) count_##typename(head)
 #define dlist_shuffle(head, typename) shuffle_##typename(head)
-#define dlist_copy_and_shuffle(head, typename) copyShuffle_##typename(head)
 #define dlist_destroy_item(item, typename) destroy_##typename(item)
 #define dlist_destroy(head, typename) destroy_list_##typename(head)
 
@@ -406,46 +402,6 @@
         return result;                                                  \
     }
 
-#define copyShuffle(typename)                                         \
-    typename *copyShuffle_##typename(typename * *head)                \
-    {                                                                 \
-        typename *result = NULL;                                      \
-        typename *current_node = NULL;                                \
-        typename *current_node_new = NULL;                            \
-        int size = count_##typename(head);                            \
-                                                                      \
-        time_t t = time(NULL);                                        \
-        srand(t);                                                     \
-                                                                      \
-        while (count_##typename(head))                                \
-        {                                                             \
-            int r = rand() % count_##typename(head);                  \
-                                                                      \
-            current_node = getAt_##typename(head, r);                 \
-            current_node_new = malloc(sizeof(typename));              \
-                                                                      \
-            memcpy(current_node_new, current_node, sizeof(typename)); \
-                                                                      \
-            current_node_new->node.prev = NULL;                       \
-            current_node_new->node.next = NULL;                       \
-                                                                      \
-            if (count_##typename(head) == size)                       \
-            {                                                         \
-                                                                      \
-                result = current_node_new;                            \
-            }                                                         \
-            else                                                      \
-            {                                                         \
-                append_##typename(&result, current_node_new);         \
-            }                                                         \
-                                                                      \
-            removeAt_##typename(head, r);                             \
-            free(current_node);                                       \
-        }                                                             \
-                                                                      \
-        return result;                                                \
-    }
-
 #define destroy_item(typename)                \
     void destroy_##typename(typename * *item) \
     {                                         \
@@ -541,12 +497,6 @@ declare_shuffle(float_item **head, float_item);
 declare_shuffle(char_item **head, char_item);
 declare_shuffle(size_t_item **head, size_t_item);
 declare_shuffle(string_item **head, string_item);
-
-declare_copyShuffle(int_item **head, int_item);
-declare_copyShuffle(float_item **head, float_item);
-declare_copyShuffle(char_item **head, char_item);
-declare_copyShuffle(size_t_item **head, size_t_item);
-declare_copyShuffle(string_item **head, string_item);
 
 declare_destroy_item(int_item **item, int_item);
 declare_destroy_item(float_item **item, float_item);
