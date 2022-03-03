@@ -57,6 +57,7 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
         table->nodes[index] = malloc(sizeof(set_node_t));
         if (!table->nodes[index])
         {
+            free(key_copy);
             return NULL;
         }
         table->nodes[index]->key = key_copy;
@@ -68,6 +69,7 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
     set_node_t *new_item = malloc(sizeof(set_node_t));
     if (!new_item)
     {
+        free(key_copy);
         return NULL;
     }
     
@@ -185,7 +187,7 @@ void set_print_keys(set_table_t *table)
 
 void set_node_destroy(set_node_t **node_ptr)
 {
-
+    free((*node_ptr)->key);
     free(*node_ptr);
     *node_ptr = NULL;
 }

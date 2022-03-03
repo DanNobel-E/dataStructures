@@ -123,13 +123,14 @@
         size_t index = hash % table->hashmap_size;                                                                                            \
         dictionary_node_##typename *head = table->nodes[index];                                                                               \
         table->nodes[table->hashmap_size] = NULL;                                                                                             \
-        char *key_copy = malloc(sizeof(char) * key_len);                                                                                      \
+        const char *key_copy = malloc(sizeof(char) * key_len);                                                                                \
         strcpy_s(key_copy, key_len + 1, key);                                                                                                 \
         if (!head)                                                                                                                            \
         {                                                                                                                                     \
             table->nodes[index] = malloc(sizeof(dictionary_node_##typename));                                                                 \
             if (!table->nodes[index])                                                                                                         \
             {                                                                                                                                 \
+                free(key_copy);                                                                                                               \
                 return NULL;                                                                                                                  \
             }                                                                                                                                 \
                                                                                                                                               \
@@ -143,6 +144,7 @@
         dictionary_node_##typename *new_item = malloc(sizeof(dictionary_node_##typename));                                                    \
         if (!new_item)                                                                                                                        \
         {                                                                                                                                     \
+            free(key_copy);                                                                                                                   \
             return NULL;                                                                                                                      \
         }                                                                                                                                     \
         new_item->key = key_copy;                                                                                                             \
@@ -283,6 +285,7 @@
 #define destory_node(typename)                                           \
     void destroy_node_##typename(dictionary_node_##typename * *node_ptr) \
     {                                                                    \
+        free((*node_ptr)->key);                                          \
         free(*node_ptr);                                                 \
         *node_ptr = NULL;                                                \
     }

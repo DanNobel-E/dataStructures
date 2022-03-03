@@ -35,7 +35,6 @@ CLOVE_TEST(Set_InsertOneKeyOneHash)
     CLOVE_PTR_EQ(node, table->nodes[0]);
     CLOVE_STRING_EQ("Key_0", table->nodes[0]->key);
     CLOVE_NULL(table->nodes[0]->next);
-    CLOVE_NULL(table->nodes[1]);
 
     set_table_destroy(&table);
 }
@@ -52,7 +51,6 @@ CLOVE_TEST(Set_InsertTwoKeysOneHash)
     CLOVE_STRING_EQ("Key_0", table->nodes[0]->key);
     CLOVE_PTR_EQ(node_1, table->nodes[0]->next);
     CLOVE_STRING_EQ("Key_1", table->nodes[0]->next->key);
-    CLOVE_NULL(table->nodes[1]);
 
     set_table_destroy(&table);
 }
@@ -86,7 +84,6 @@ CLOVE_TEST(Set_InsertTwoKeysTwoHash)
     CLOVE_STRING_EQ("Key_1", table->nodes[0]->key);
     CLOVE_NULL(table->nodes[0]->next);
     CLOVE_NULL(table->nodes[1]->next);
-    CLOVE_NULL(table->nodes[2]);
 
     set_table_destroy(&table);
 }
@@ -123,7 +120,6 @@ CLOVE_TEST(Set_InsertAlreadyExistingKeyOneHash)
     CLOVE_PTR_EQ(node_0, table->nodes[0]);
     CLOVE_STRING_EQ("Key_0", table->nodes[0]->key);
     CLOVE_NULL(table->nodes[0]->next);
-    CLOVE_NULL(table->nodes[1]);
     CLOVE_NULL(node_1);
 
     set_table_destroy(&table);
@@ -187,7 +183,6 @@ CLOVE_TEST(Set_SearchOnSingleHash)
     CLOVE_PTR_EQ(nodes[2], searched);
     CLOVE_STRING_EQ(nodes[2]->key, searched->key);
     CLOVE_PTR_EQ(searched, table->nodes[0]->next->next);
-    CLOVE_NULL(table->nodes[1]);
 
     set_table_destroy(&table);
 }
@@ -221,7 +216,6 @@ CLOVE_TEST(Set_SearchOnMultipleHash)
     CLOVE_STRING_EQ(nodes[2]->key, searched_2->key);
     CLOVE_PTR_EQ(searched_1, table->nodes[0]);
     CLOVE_PTR_EQ(searched_2, table->nodes[1]->next);
-    CLOVE_NULL(table->nodes[2]);
 
     set_table_destroy(&table);
 }
@@ -296,7 +290,6 @@ CLOVE_TEST(Set_SearchHeadKeyOnSingleHash)
     CLOVE_PTR_EQ(nodes[0], searched);
     CLOVE_STRING_EQ(nodes[0]->key, searched->key);
     CLOVE_NOT_NULL(table->nodes[0]->next);
-    CLOVE_NULL(table->nodes[1]);
 
 
     set_table_destroy(&table);
@@ -331,7 +324,6 @@ CLOVE_TEST(Set_SearchHeadKeyOnMultipleHash)
     CLOVE_STRING_EQ(nodes[1]->key, searched_0->key);
     CLOVE_PTR_EQ(searched_1, table->nodes[1]);
     CLOVE_PTR_EQ(searched_0, table->nodes[0]);
-    CLOVE_NULL(table->nodes[2]);
 
     set_table_destroy(&table);
 }
@@ -377,7 +369,6 @@ CLOVE_TEST(Set_RemoveLastElement)
     CLOVE_NOT_NULL(table);
     CLOVE_PTR_EQ(inserted, removed);
     CLOVE_STRING_EQ(inserted->key, removed->key);
-    CLOVE_NULL(table->nodes[0]);
 
     set_table_destroy(&table);
     set_node_destroy(&removed);
@@ -411,7 +402,6 @@ CLOVE_TEST(Set_RemoveHeadKey)
     CLOVE_PTR_EQ(nodes[1], table->nodes[0]);
     CLOVE_STRING_EQ(nodes[1]->key,  table->nodes[0]->key);
     CLOVE_NULL(removed->next);
-    CLOVE_NULL(table->nodes[1]);
 
 
     set_table_destroy(&table);
@@ -445,7 +435,6 @@ CLOVE_TEST(Set_RemoveSuccess)
     CLOVE_STRING_EQ(nodes[2]->key, removed->key);
     CLOVE_NULL(table->nodes[1]->next);
     CLOVE_NULL(removed->next);
-    CLOVE_NULL(table->nodes[2]);
 
 
     set_table_destroy(&table);
