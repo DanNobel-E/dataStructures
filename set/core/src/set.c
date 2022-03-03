@@ -48,6 +48,10 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
     size_t hash = djb33x_hash(key, key_len);
     size_t index = hash % table->hashmap_size;
     set_node_t *head = table->nodes[index];
+    table->nodes[table->hashmap_size]= NULL;
+    char * key_copy= malloc(sizeof(char)*key_len);
+    strcpy_s(key_copy,key_len+1,key);
+
     if (!head)
     {
         table->nodes[index] = malloc(sizeof(set_node_t));
@@ -55,12 +59,9 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
         {
             return NULL;
         }
-        char * key_copy= malloc(sizeof(char)*key_len);
-        strcpy_s(key_copy,key_len+1,key);
         table->nodes[index]->key = key_copy;
         table->nodes[index]->key_len = key_len;
         table->nodes[index]->next = NULL;
-        table->nodes[table->hashmap_size]= NULL;
         return table->nodes[index];
     }
 
@@ -69,7 +70,8 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
     {
         return NULL;
     }
-    new_item->key = key;
+    
+    new_item->key = key_copy;
     new_item->key_len = key_len;
     new_item->next = NULL;
     set_node_t *tail = head;

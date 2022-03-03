@@ -7,7 +7,7 @@
 
 #define string const char *
 
-//defining structs signatures and fields
+// defining structs signatures and fields
 #define dictionary_node_t(typename)              \
     typedef struct dictionary_node_##typename    \
     {                                            \
@@ -26,7 +26,7 @@
     }                                          \
     dictionary_table_##typename;
 
-//defining structs implementation names
+// defining structs implementation names
 #define int_table dictionary_table_int
 #define float_table dictionary_table_float
 #define char_table dictionary_table_char
@@ -39,7 +39,7 @@
 #define size_t_node dictionary_node_size_t
 #define string_node dictionary_node_string
 
-//defining declarations signatures
+// defining declarations signatures
 #define declare_table_new(size, typename) \
     dictionary_table_##typename *table_new_##typename(size);
 
@@ -70,7 +70,7 @@
 #define declare_destroy_table(table_ptr, typename) \
     void destroy_table_##typename(table_ptr);
 
-//defining functions signatures
+// defining functions signatures
 #define dictionary_table_new(size, typename) table_new_##typename(size);
 #define dictionary_insert(table, key, key_len, value, typename) insert_##typename(table, key, key_len, value);
 #define dictionary_change_value(table, key, key_len, value, typename) change_value_##typename(table, key, key_len, value);
@@ -82,7 +82,7 @@
 #define dictionary_destroy_node(node_ptr, typename) destroy_node_##typename(node_ptr);
 #define dictionary_destroy_table(table_ptr, typename) destroy_table_##typename(table_ptr);
 
-//functions generic implementation
+// functions generic implementation
 #define table_new(typename)                                                               \
     dictionary_table_##typename *table_new_##typename(size_t hashmap_size)                \
     {                                                                                     \
@@ -122,6 +122,9 @@
         size_t hash = dictionary_djb33x_hash(key, key_len);                                                                                   \
         size_t index = hash % table->hashmap_size;                                                                                            \
         dictionary_node_##typename *head = table->nodes[index];                                                                               \
+        table->nodes[table->hashmap_size] = NULL;                                                                                             \
+        char *key_copy = malloc(sizeof(char) * key_len);                                                                                      \
+        strcpy_s(key_copy, key_len + 1, key);                                                                                                 \
         if (!head)                                                                                                                            \
         {                                                                                                                                     \
             table->nodes[index] = malloc(sizeof(dictionary_node_##typename));                                                                 \
@@ -129,13 +132,11 @@
             {                                                                                                                                 \
                 return NULL;                                                                                                                  \
             }                                                                                                                                 \
-            char *key_copy = malloc(sizeof(char) * key_len);                                                                                  \
-            strcpy_s(key_copy, key_len + 1, key);                                                                                             \
+                                                                                                                                              \
             table->nodes[index]->key = key_copy;                                                                                              \
             table->nodes[index]->key_len = key_len;                                                                                           \
             table->nodes[index]->object = value;                                                                                              \
             table->nodes[index]->next = NULL;                                                                                                 \
-            table->nodes[table->hashmap_size] = NULL;                                                                                         \
             return table->nodes[index];                                                                                                       \
         }                                                                                                                                     \
                                                                                                                                               \
@@ -144,7 +145,7 @@
         {                                                                                                                                     \
             return NULL;                                                                                                                      \
         }                                                                                                                                     \
-        new_item->key = key;                                                                                                                  \
+        new_item->key = key_copy;                                                                                                             \
         new_item->key_len = key_len;                                                                                                          \
         new_item->object = value;                                                                                                             \
         new_item->next = NULL;                                                                                                                \
@@ -309,8 +310,7 @@
         }                                                                          \
     }
 
-
-//struct definition
+// struct definition
 dictionary_node_t(int);
 dictionary_node_t(float);
 dictionary_node_t(char);
@@ -323,7 +323,7 @@ dictionary_table_t(char);
 dictionary_table_t(size_t);
 dictionary_table_t(string);
 
-//functions declarations
+// functions declarations
 size_t dictionary_djb33x_hash(const char *key, const size_t keylen);
 
 declare_table_new(const size_t hashmap_size, int);
@@ -391,4 +391,3 @@ declare_destroy_table(float_table **table_ptr, float);
 declare_destroy_table(char_table **table_ptr, char);
 declare_destroy_table(size_t_table **table_ptr, size_t);
 declare_destroy_table(string_table **table_ptr, string);
-
