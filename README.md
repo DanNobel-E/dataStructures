@@ -73,14 +73,19 @@ where *typename* refers to an existing C native type or struct.
 |----------|-----------|------------|-----------------|
 | **item_new** | *value*: object value associated to the creating list item. <br/><br/> *typename*: type of the list item to create. | A pointer to the created list item. | Allocates memory for a list item of type typenam and returns its pointer. |
 | **item_print_list** | *list*: pointer to list head item. <br/><br/> *typename*: list items type. | void | Prints all objects of the given list. |
-| **list_append** | *head*: pointer to list's head pointer. <br/><br/> *item*: item to append. <br/><br/> *typename*: list items type. | A pointer to list's new item. | Appends a new item on list's tail. |
-| **list_get_tail** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to list's tail. | Get given list's tail item. |
-| **list_pop** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to popped item. | Pops out and returns the first list's item. Popped item next node bocomes list's new head node. |
-| **list_invert** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to list's new head. | Inverts all list's nodes links, putting list's tail as head and vice versa. |
-| **list_copy_and_invert** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to new list's head. | Makes a copy of all items in the given list. Then inverts their links. |
-| **list_remove** | *head*: pointer to list's head pointer. <br/><br/> *item*: item to remove. <br/><br/> *typename*: list items type. | A pointer to the removed item. | Checks if the given item is contained in the given list. If it does, the item gets removed and list's node links are recalculeted. |
-| **list_destroy_item** | *item*: pointer to item pointer. <br/><br/> *typename*: item type. | void | Frees memory allocated by the given item. |
-| **list_destroy** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | void | Frees memory allocated by all list's items. |
+| **dlist_append** | *head*: pointer to list's head pointer. <br/><br/> *item*: item to append. <br/><br/> *typename*: list items type. | A pointer to list's new item. | Appends a new item on list's tail. |
+| **dlist_get_element_at** | *head*: pointer to list's head pointer. <br/><br/> *index*: index of the element to get. <br/><br/> *typename*: list items type. | A pointer to list's item at the given index. | If given index is allowed, get list's item at the given index. |
+| **dlist_get_tail** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to list's tail. | Get given list's tail item. |
+| **dlist_pop** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to popped item. | Pops out and returns the first list's item. Popped item next node bocomes list's new head node. |
+| **list_insert_before** | *head*: pointer to list's head pointer. <br/><br/> *target_item*: token item to point where to place the new item. <br/><br/> *item_to_insert*: item to insert before target_item.  <br/><br/> *typename*: list items type. | A pointer to list's new item. | If target_item is contained by the list and item_to_insert is not, inserts item_to_insert before target_item and recalculates list's nodes links. |
+| **list_insert_after** | *head*: pointer to list's head pointer. <br/><br/> *target_item*: token item to point where to place the new item. <br/><br/> *item_to_insert*: item to insert after target_item.  <br/><br/> *typename*: list items type. | A pointer to list's new item. | If target_item is contained by the list and item_to_insert is not, inserts item_to_insert after target_item and recalculates list's nodes links. |
+| **list_contains** | *head*: pointer to list's head pointer. *item*: item to check. <br/><br/> *typename*: list items type. | True if the given list contains the given item, false otherwise. | Tells if a specified item is cointained in the given list. |
+| **list_count** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | Number of list items in the given list. | Gives informations about the number of elements of the given list. |
+| **list_shuffle** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to list's new head. | Shuffles the given list, randomizing list's nodes connections. |
+| **dlist_remove** | *head*: pointer to list's head pointer. <br/><br/> *item*: item to remove. <br/><br/> *typename*: list items type. | A pointer to the removed item. | Checks if the given item is contained in the given list. If it does, the item gets removed and list's node links are recalculeted. |
+| **dlist_remove_at** | *head*: pointer to list's head pointer. <br/><br/> *index*: index of the element to remove. <br/><br/> *typename*: list items type. | A pointer to the removed item. | Checks if the given index is allowed. If true, the list item at given index gets removed and list's node links are recalculeted. |
+| **dlist_destroy_item** | *item*: pointer to item pointer. <br/><br/> *typename*: item type. | void | Frees memory allocated by the given item. |
+| **dlist_destroy** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | void | Frees memory allocated by all list's items. |
 
 
 
