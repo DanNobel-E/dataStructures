@@ -55,11 +55,11 @@ On current release:
 ### More
 *Generic implementation* with five already implemented types for **dictionary_node** and **dictionary_table**:
 
-* int
-* float
-* char
-* size_t
-* string
+* *int*
+* *float*
+* *char*
+* *size_t*
+* *string*
 
 You can add new node/table types by calling macros: 
 
