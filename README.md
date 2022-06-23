@@ -15,9 +15,36 @@ On current release:
 
 ### About
 > A **Linked List** is a collection of elements where each node owns a reference to the next one, head to tail.
+> 
+### More
+*Generic implementation* with five already implemented types for **list_item**:
+
+* *int*
+* *float*
+* *char*
+* *size_t*
+* *string*
+
+You can add new list item types by calling macros: 
+
+* **item_t(*typename*)**
+* **ptr_item_t(*typename*)**
+
+where *typename* refers to an existing typedef. 
 
 ### Functions
-
+| **Name** | **Params**| **Return** | **Description** |
+|----------|-----------|------------|-----------------|
+| **item_new** | *value*: object value associated to the creating list item. <br/><br/> *typename*: type of the list item to create. | A pointer to the created list item. | Allocates memory for a list item of type typenam and returns its pointer. |
+| **item_print_list** | *list*: pointer to list head item. <br/><br/> *typename*: list items type. | void | Prints all objects of the given list. |
+| **list_append** | *head*: pointer to list's head pointer. <br/><br/> *item*: item to append. <br/><br/> *typename*: list items type. | A pointer to list's new item. | Appends a new item on list's tail. |
+| **list_get_tail** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to list's tail. | Get given list's tail item. |
+| **list_pop** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to popped item. | Pops out and returns the first list's item. Popped item next node bocomes list's new head node. |
+| **list_invert** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to list's new head. | Inverts all list's nodes links, putting list's tail as head and vice versa. |
+| **list_copy_and_invert** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | A pointer to new list's head. | Makes a copy of all items in the given list. Then inverts their links. |
+| **list_remove** | *head*: pointer to list's head pointer. <br/><br/> *item*: item to remove. <br/><br/> *typename*: list items type. | A pointer to the removed item. | Checks if the given item is contained in the given list. If it does, the item gets removed and list's node links are recalculeted. |
+| **list_destroy_item** | *item*: pointer to item pointer. <br/><br/> *typename*: item type. | void | Frees memory allocated by the given item. |
+| **list_destroy** | *head*: pointer to list's head pointer. <br/><br/> *typename*: list items type. | void | Frees memory allocated by all list's items. |
 
 
 ## Doubly Linked List
