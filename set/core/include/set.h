@@ -55,7 +55,7 @@ set_node_t *set_insert(set_table_t *table, const char *key, const size_t key_len
 set_node_t *set_search(set_table_t *table,const char *key, const size_t key_len);
 
 /*
- *Returns the head of the key list which contains the given key, according to table hashmap size. 
+ *
  *@return pointer to list head node of the searched key.
  *
  *@param table pointer to set table where to search key list head.

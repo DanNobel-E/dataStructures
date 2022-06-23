@@ -339,13 +339,13 @@ declare_insert(int_table *table, const char *key, const size_t key_len, int valu
 declare_insert(float_table *table, const char *key, const size_t key_len, float value, float);
 declare_insert(char_table *table, const char *key, const size_t key_len, char value, char);
 declare_insert(size_t_table *table, const char *key, const size_t key_len, size_t value, size_t);
-declare_insert(string_table *table, const char *key, const size_t key_len, string vaue, string);
+declare_insert(string_table *table, const char *key, const size_t key_len, string vaule, string);
 
 declare_change_value(int_table *table, const char *key, const size_t key_len, int value, int);
 declare_change_value(float_table *table, const char *key, const size_t key_len, float value, float);
 declare_change_value(char_table *table, const char *key, const size_t key_len, char value, char);
 declare_change_value(size_t_table *table, const char *key, const size_t key_len, size_t value, size_t);
-declare_change_value(string_table *table, const char *key, const size_t key_len, string vaue, string);
+declare_change_value(string_table *table, const char *key, const size_t key_len, string value, string);
 
 declare_search(int_table *table, const char *key, const size_t key_len, int);
 declare_search(float_table *table, const char *key, const size_t key_len, float);
