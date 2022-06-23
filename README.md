@@ -41,9 +41,9 @@ On current release:
 | **set_search** | *table*: pointer to set table where to search given key. <br/><br/> *key*: key to search for. <br/><br/> *keylen*: lenght in bytes of the searched key. | A pointer to the set node of the searched key. | Searches if the given table contains the given key. |
 | **set_search_keyList_head** | *table*: pointer to set table where to search key list head. <br/><br/> *key*: key to search for. <br/><br/> *keylen*: lenght in bytes of the searched key.  | A pointer to the set head node of the searched key. | Returns the head of the key list which contains the given key, according to table hashmap size. |
 | **set_remove** | *table*: pointer to set table where to remove given key. <br/><br/> *key*: key to remove. <br/><br/> *keylen*: lenght in bytes of the key to remove. | A pointer to the set node of the removed key. | If current key is contained in given table, removes it and returns the related list node.  |
-| **set_node_destroy** | *node_ptr*: pointer to set node to destroy. | - | Frees memory allocated by the given set node. |
-| **set_table_destroy** | *table_ptr*: pointer to set table to destroy. | - | Frees memory allocated by the given set table. |
-| **set_print_keys** | *table*: table to print. | - | Prints all the keys in the given table. |
+| **set_node_destroy** | *node_ptr*: pointer to set node to destroy. | void | Frees memory allocated by the given set node. |
+| **set_table_destroy** | *table_ptr*: pointer to set table to destroy. | void | Frees memory allocated by the given set table. |
+| **set_print_keys** | *table*: table to print. | void | Prints all the keys in the given table. |
 
 ## Dictionary
 
