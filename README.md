@@ -15,6 +15,7 @@ On current release:
 ## Linked List
 
 #### About
+A **Linked List** is a collection of elements where each node owns a reference to the next one, head to tail.
 
 #### Functions
 
@@ -23,6 +24,7 @@ On current release:
 ## Doubly Linked List
 
 #### About
+A **Doubly Linked List** is a linked list where each element owns a reference to both its next and previous neighbour node.
 
 #### Functions
 
@@ -31,6 +33,7 @@ On current release:
 ## Set
 
 #### About
+A **Set** is a list of quickly searchable values where each element is hashed to allow fast retrieval.
 
 #### Functions
 | **Name** | **Params**| **Return** | **Description** |
@@ -48,5 +51,6 @@ On current release:
 ## Dictionary
 
 #### About
+A **Dictionary** is a unique kind of set, where each hashed key is linked to a value.
 
 #### Functions
