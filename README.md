@@ -64,3 +64,8 @@ On current release:
 | **set_node_destroy** | *node_ptr*: pointer to set node to destroy. | void | Frees memory allocated by the given set node. |
 | **set_table_destroy** | *table_ptr*: pointer to set table to destroy. | void | Frees memory allocated by the given set table. |
 | **set_print_keys** | *table*: table to print. | void | Prints all the keys in the given table. |
+
+
+## Tests
+
+Tests provided by using [Clove](https://github.com/fdefelici/clove-unit) test unit library.
