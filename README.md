@@ -52,7 +52,7 @@ On current release:
 ### About
 > A **Dictionary** is a unique kind of set, where each hashed key is linked to a value.
 
-### Generics
+### More
 *Generic implementation* with five already implemented types for **dictionary_node** and **dictionary_table**:
 
 * int
