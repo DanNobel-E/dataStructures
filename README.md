@@ -11,11 +11,10 @@ On current release:
 * Dictionaries
 
 
-
 ## Linked List
 
 ### About
-A **Linked List** is a collection of elements where each node owns a reference to the next one, head to tail.
+> A **Linked List** is a collection of elements where each node owns a reference to the next one, head to tail.
 
 ### Functions
 
@@ -24,7 +23,7 @@ A **Linked List** is a collection of elements where each node owns a reference t
 ## Doubly Linked List
 
 ### About
-A **Doubly Linked List** is a linked list where each element owns a reference to both its next and previous neighbour node.
+> A **Doubly Linked List** is a linked list where each element owns a reference to both its next and previous neighbour node.
 
 ### Functions
 
@@ -33,7 +32,7 @@ A **Doubly Linked List** is a linked list where each element owns a reference to
 ## Set
 
 ### About
-A **Set** is a list of quickly searchable values where each element is hashed to allow fast retrieval.
+> A **Set** is a list of quickly searchable values where each element is hashed to allow fast retrieval.
 
 ### Functions
 | **Name** | **Params**| **Return** | **Description** |
@@ -51,7 +50,7 @@ A **Set** is a list of quickly searchable values where each element is hashed to
 ## Dictionary
 
 ### About
-A **Dictionary** is a unique kind of set, where each hashed key is linked to a value.
+> A **Dictionary** is a unique kind of set, where each hashed key is linked to a value.
 
 ### Functions
 | **Name** | **Params**| **Return** | **Description** |
